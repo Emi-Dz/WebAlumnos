@@ -19,8 +19,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author emidz
  */
-@WebServlet(name = "SvPersona", urlPatterns = {"/SvPersona"})
-public class SvPersona extends HttpServlet {
+@WebServlet(name = "SvEditar", urlPatterns = {"/SvEditar"})
+public class SvEditar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,25 +48,35 @@ public class SvPersona extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        String id = request.getParameter("id");
+      
+        ControllerMaster ctrl = new ControllerMaster ();
+
+        Persona per = ctrl.buscarPersona(id);
+        
+       
+        HttpSession myses = request.getSession(true);
+        myses.setAttribute("nuevaPersona", per);
+        
+        response.sendRedirect("editar.jsp");
     }
 
-    
+        
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        String id = request.getParameter("id");
         String nombre  = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
         String dni  = request.getParameter("dni");
         int edad = Integer.parseInt(request.getParameter("edad"));
         String profesion  = request.getParameter("profesion");
         
-        ControllerMaster ctrl   = new ControllerMaster();
-        
-        ctrl.agregarPersona(new Persona (dni, nombre, apellido, edad, profesion));
-        
-        
+        ControllerMaster ctrl = new ControllerMaster ();
+         
+        ctrl.editarPersona(new Persona(id, dni, nombre, apellido, edad, profesion));
         
         HttpSession myses = request.getSession(true);
         
@@ -74,7 +84,7 @@ public class SvPersona extends HttpServlet {
         
         response.sendRedirect("view.jsp");
     }
-    
+
     /**
      * Returns a short description of the servlet.
      *

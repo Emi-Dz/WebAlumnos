@@ -5,9 +5,12 @@
  */
 package data;
 
+import data.exceptions.NonexistentEntityException;
 import entity.Persona;
 import entity.Usuario;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,6 +20,14 @@ public class ControllerData {
     
     UsuarioJpaController userJPA = new UsuarioJpaController();
     PersonaJpaController perJPA = new PersonaJpaController();
+    
+    public void borrarPer (String id){
+        try {
+            perJPA.destroy(id);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControllerData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     public List<Usuario> traerUsuarios(){
     
@@ -35,6 +46,16 @@ public class ControllerData {
         
         perJPA.create(persona);
         
+    }
+    public void editPersona (Persona persona){
+        try {
+            perJPA.edit(persona);
+        } catch (Exception ex) {
+            Logger.getLogger(ControllerData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public Persona buscarP (String id){
+       return perJPA.findPersona(id);
     }
     
 }

@@ -13,7 +13,7 @@ public class Persona implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private String id;
     
     @Basic
     private String dni;
@@ -23,6 +23,20 @@ public class Persona implements Serializable {
     private String profesion;
 
     public Persona() {
+    }
+
+    public Persona(String id) {
+        this.id = id;
+    }
+
+    
+    public Persona(String id, String dni, String nombre, String apellido, int edad, String profesion) {
+        this.id = id;
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+        this.profesion = profesion;
     }
 
  
@@ -36,11 +50,11 @@ public class Persona implements Serializable {
         this.profesion = profesion;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
     

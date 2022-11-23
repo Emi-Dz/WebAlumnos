@@ -1,9 +1,10 @@
 <%-- 
-    Document   : register
-    Created on : 18 oct. 2022, 17:04:30
-    Author     : Juan Cruz
+    Document   : editar
+    Created on : 16 nov. 2022, 16:24:52
+    Author     : emidz
 --%>
 
+<%@page import="entity.Persona"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,7 +16,7 @@
     <meta name="keywords" content="Colorlib Templates">
 
     <!-- Title Page-->
-    <title>Au Register Forms by Colorlib</title>
+    <title>Editar</title>
 
     <!-- Icons font CSS-->
     <link href="colorlib-regform-5/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -36,23 +37,26 @@
         <div class="wrapper wrapper--w790">
             <div class="card card-5">
                 <div class="card-heading">
-                    <h2 class="title">Registrar nueva persona</h2>
+                    <h2 class="title">Editar persona</h2>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="SvPersona">
+                    <form method="POST" action="SvEditar">
                         <div class="form-row m-b-55">
                             <div class="name">Nombre</div>
                             <div class="value">
                                 <div class="row row-space">
                                     <div class="col-2">
+                                        <%Persona per = (Persona) request.getSession().getAttribute("nuevaPersona");%>
+                                        <% String id = per.getId(); %>
                                         <div class="input-group-desc">
-                                            <input class="input--style-5" type="text" name="nombre">
+                                            <input type="hidden" name="id" value="<%= id %>" >
+                                            <input class="input--style-5" type="text" name="nombre" value="<%=per.getNombre()%>">
                                             <label class="label--desc">Nombre</label>
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="input-group-desc">
-                                            <input class="input--style-5" type="text" name="apellido">
+                                            <input class="input--style-5" type="text" name="apellido" value="<%=per.getApellido()%>">
                                             <label class="label--desc">Apellido</label>
                                         </div>
                                     </div>
@@ -63,7 +67,7 @@
                             <div class="name">DNI</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-5" type="text" name="dni">
+                                    <input class="input--style-5" type="text" name="dni" value="<%=per.getDni()%>">
                                 </div>
                             </div>
                         </div>
@@ -71,7 +75,7 @@
                             <div class="name">Edad</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-5" type="number" name="edad">
+                                    <input class="input--style-5" type="number" name="edad" value="<%=per.getEdad()%>">
                                 </div>
                             </div>
                         </div>
@@ -79,13 +83,13 @@
                             <div class="name">Profesión</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-5" type="text" name="profesion">
+                                    <input class="input--style-5" type="text" name="profesion" value="<%=per.getProfesion()%>">
                                 </div>
                             </div>
                         </div>
                         
                         <div>
-                            <button class="btn btn--radius-2 btn--red" type="submit">Register</button>
+                            <button class="btn btn--radius-2 btn--red" type="submit">Editar</button>
                         </div>
                     </form>
                 </div>

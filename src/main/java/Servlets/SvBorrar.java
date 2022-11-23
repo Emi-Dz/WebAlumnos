@@ -5,7 +5,6 @@
 package Servlets;
 
 import data.ControllerMaster;
-import entity.Persona;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,8 +18,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author emidz
  */
-@WebServlet(name = "SvPersona", urlPatterns = {"/SvPersona"})
-public class SvPersona extends HttpServlet {
+@WebServlet(name = "SvBorrar", urlPatterns = {"/SvBorrar"})
+public class SvBorrar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,35 +50,34 @@ public class SvPersona extends HttpServlet {
         processRequest(request, response);
     }
 
-    
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       
+            String id = request.getParameter("id");
+            
+            ControllerMaster ctrl = new ControllerMaster ();
+            ctrl.borrarPersona(id);
+            
+            HttpSession myses = request.getSession(true);
         
-        String nombre  = request.getParameter("nombre");
-        String apellido = request.getParameter("apellido");
-        String dni  = request.getParameter("dni");
-        int edad = Integer.parseInt(request.getParameter("edad"));
-        String profesion  = request.getParameter("profesion");
+            myses.setAttribute("listaPersonas", ctrl.traerPersona());
+            
+            response.sendRedirect("view.jsp");
+            
+            
         
-        ControllerMaster ctrl   = new ControllerMaster();
-        
-        ctrl.agregarPersona(new Persona (dni, nombre, apellido, edad, profesion));
-        
-        
-        
-        HttpSession myses = request.getSession(true);
-        
-        myses.setAttribute("listaPersonas", ctrl.traerPersona());
-        
-        response.sendRedirect("view.jsp");
     }
     
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+   
     @Override
     public String getServletInfo() {
         return "Short description";

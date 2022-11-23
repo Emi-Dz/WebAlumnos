@@ -62,7 +62,7 @@
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-md-6 text-center mb-5">
-                                    <h2 class="heading-section">Table #10</h2>
+                                    <h2 class="heading-section">Tabla Personas</h2>
                                 </div>
                             </div>
                             <div class="row">
@@ -96,12 +96,20 @@
                                                     <%String profesion =  per.getProfesion();%>
                                                     <td><%= profesion %></td>
                                                     
-                                                    <% long id = per.getId(); %>
+                                                    <% String id = per.getId(); %>
                                                     <td>
                                                         <form name="borrar" action="SvBorrar" method="post" style="display:inline" >
                                                             <input type="hidden" name="id" value="<%= id %>" >
                                                             <button type="submit" class="btn btn-danger btn-xs" data-title="Delete" style="display:inline"> 
                                                             Eliminar
+                                                            </button> 
+                                                        </form>
+                                                    </td>
+                                                    <td>
+                                                        <form name="borrar" action="SvEditar" method="get" style="display:inline" >
+                                                            <input type="hidden" name="id" value="<%= id %>" >
+                                                            <button type="submit" class="btn btn-danger btn-xs" data-title="Update" style="display:inline"> 
+                                                            Editar
                                                             </button> 
                                                         </form>
                                                     </td>

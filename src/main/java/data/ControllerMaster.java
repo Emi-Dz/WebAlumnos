@@ -42,4 +42,13 @@ public class ControllerMaster {
     public void agregarPersona (Persona p){
         ctrldata.crearPersona(p);
     }
+    public void borrarPersona (String id){
+        ctrldata.borrarPer(id);
+    }
+    public void editarPersona (Persona per){
+        ctrldata.editPersona(per);
+}
+    public Persona buscarPersona (String id){
+        return ctrldata.buscarP(id);
+    }
 }
